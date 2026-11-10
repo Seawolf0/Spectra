@@ -12,7 +12,7 @@ Spectra started as an experiment in what a frontier AI model can build from a de
 
 ## Try it
 
-- **Online:** see the GitHub Pages link in this repo's *About* section.
+- **Online:** [seawolf0.github.io/Spectra](https://seawolf0.github.io/Spectra/)
 - **Locally:** download `index.html` and open it in Safari or Chrome.
 
 It requires a desktop browser with **WebGL2** and floating-point render targets. A recent Safari or Chrome on a Mac works well, and it was developed on an Apple Silicon MacBook Pro.
