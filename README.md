@@ -20,7 +20,7 @@ It requires a desktop browser with **WebGL2** and floating-point render targets.
 ## Modes
 
 ### 3D: progressive spectral path tracer
-A studio scene with a glass prism, a glass sphere, a faceted crystal and a polished metal ring, lit by a narrow beam of white light. All rendering happens in a fragment shader.
+A studio scene with a curved backdrop, filled with glass and metal objects and lit by up to three lights. All rendering happens in a fragment shader.
 
 - **Spectral rendering:** paths carry real wavelengths (about 380 to 700 nm), and wavelength-dependent refraction splits white light into a rainbow (dispersion).
 - **Glass and metal:** Fresnel reflection and refraction, total internal reflection, Beer–Lambert absorption for tinted glass, and spectral metal reflectance.
@@ -29,31 +29,41 @@ A studio scene with a glass prism, a glass sphere, a faceted crystal and a polis
 - **Fast convergence:** next-event estimation with multiple importance sampling for the studio lights.
 - **Camera:** thin-lens depth of field, with double-click to focus.
 - **Color pipeline:** CIE color matching to sRGB, ACES tone mapping and bloom.
-- **Progressive refinement:** the image is noisy while moving and refines toward a clean result when still. The resolution adapts to keep interaction smooth.
+- **Denoiser:** an edge-aware à-trous filter, guided by depth, normals and surface color, cleans up the image at low sample counts and fades out as the render converges. Low-discrepancy sampling and an adaptive firefly clamp help it converge faster.
+- **Progressive refinement:** the image refines toward a clean, unbiased result when still. A "Show raw samples" toggle turns the denoiser off. The resolution adapts to keep interaction smooth.
+- **Objects:** a glass prism, sphere, faceted crystal, cube, biconvex lens and brilliant-cut diamond, plus a polished metal ring, a flat mirror and a back wall that catches spectra.
+- **Lights:** up to three, each a white spot (with color temperature), a colored light or a monochromatic laser.
 
 **Controls:** light angle, elevation, beam width and aim; color temperature, studio fill and haze; dispersion, refractive index, tint and tint density; aperture and focus distance; bounces, exposure and resolution. Click an object to select it and drag it across the floor.
 
-**Presets:** *Pink Floyd prism*, *Caustic pool*, *Crystal cathedral*.
+**Presets (14):** *Pink Floyd prism*, *Caustic pool*, *Crystal cathedral*, *Cardioid*, *Diamond fire*, *Burning glass*, *Rainbow sphere*, *RGB shadows*, *Laser show*, *Trapped light*, *Spectrum on the wall*, *Stained glass*, *Macro*, *Moonlight*.
 
 ### 2D: spectral light table
 A top-down optics bench. You build setups and watch tens of thousands of spectral rays per frame flow through them.
 
 - **Optics:** convex and concave lenses, prisms, glass blocks, glass balls, curved glass strips, flat and curved mirrors, absorbing walls and diffuse surfaces.
 - **Light sources:** white laser, flashlight, point light and a monochromatic laser with a wavelength control.
+- **Light detector:** measures how much light, and what color, reaches it.
 - **Editing:** move, rotate and scale with handles, plus undo/redo, duplicate, delete and arrow-key nudging.
 - **Per-object glass settings:** refractive index and dispersion.
 
-**Presets:** *Newton's prism*, *Rainbow in a raindrop* (primary and secondary bows), *Fiber optic* (total internal reflection), *Telescope* (a Keplerian refractor).
+**Presets (13):** *Newton's prism*, *Rainbow in a raindrop* (primary and secondary bows), *Fiber optic* (total internal reflection), *Telescope* (a Keplerian refractor), *Concave mirror focus*, *Periscope*, *Chromatic aberration*, *Achromatic doublet*, *Microscope*, *Lighthouse lens*, *Laser maze*, *Kaleidoscope*, *Dispersion showdown*.
 
-Both modes share the spectral color pipeline and the PNG screenshot button.
+Both modes share the spectral color pipeline and the PNG screenshot button. Presets are grouped by theme (Refraction, Reflection, Colour, Optics and Showcase), each with a one-line note on the physics.
+
+## Learning tools
+
+- **Guided tour:** opens on your first visit and walks through the main controls, with each card placed next to the control it explains. The Tutorial button in the top bar restarts it.
+- **Challenges:** 18 short tasks across both modes, from aiming a single laser to building anything you like. Each one unlocks only the controls it needs, checks your progress live with light detectors, and saves your progress in the browser.
 
 ## Version history
 
 | Version | What changed |
 |---|---|
 | **1.0** | First build: 3D path tracer and 2D light table, with three and four presets |
+| **2.0** | Denoiser and faster sampling, a curved studio backdrop, five new 3D objects, up to three lights, 20 new presets, a guided tour and 18 challenges |
 
-More versions are coming: a denoiser, more objects and presets, a guided tour and challenges, sound and an intro, and full 3D object controls.
+More versions are coming, starting with sound and a cinematic intro.
 
 ## How it was made
 
